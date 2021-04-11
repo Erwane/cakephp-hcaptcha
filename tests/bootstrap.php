@@ -27,4 +27,5 @@ date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
 Configure::write('debug', true);
+Configure::write('HCaptcha.secret', 'hcaptcha-secret');
 Security::setSalt('a-long-but-not-random-value');
