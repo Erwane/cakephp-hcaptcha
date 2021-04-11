@@ -1,0 +1,36 @@
+{
+    "name": "erwane/cakephp-hcaptcha",
+    "description": "HCaptcha plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "keywords": [
+        "cakephp",
+        "hcaptcha"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "erwane",
+            "email": "email@example.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "HCaptcha\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HCaptcha\\Test\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "cakephp/cakephp": "^4.0"
+    },
+    "require-dev": {
+        "cakephp/cakephp-codesniffer": "^4.0",
+        "php-parallel-lint/php-parallel-lint": "^1.0",
+        "phpro/grumphp": "^v1.0",
+        "phpunit/phpunit": "^8.0 | ^9.0"
+    }
+}
