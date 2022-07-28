@@ -39,9 +39,9 @@ class PluginTest extends TestCase
     public function testInitialize(): void
     {
         $listeners = EventManager::instance()->listeners('View.beforeRender');
-        self::assertCount(1, $listeners);
-        self::assertInstanceOf('\Hcaptcha\Plugin', $listeners[0]['callable'][0]);
-        self::assertSame('addWidget', $listeners[0]['callable'][1]);
+        $this->assertCount(1, $listeners);
+        $this->assertInstanceOf('\Hcaptcha\Plugin', $listeners[0]['callable'][0]);
+        $this->assertSame('addWidget', $listeners[0]['callable'][1]);
     }
 
     /**
@@ -56,7 +56,7 @@ class PluginTest extends TestCase
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         $result = $this->plugin->addWidget($event);
 
-        self::assertNull($result);
+        $this->assertNull($result);
     }
 
     /**
@@ -75,6 +75,6 @@ class PluginTest extends TestCase
 
         /** @var \Cake\View\Helper\FormHelper $formHelper */
         $formHelper = $view->helpers()->get('Form');
-        self::assertInstanceOf(HCaptchaWidget::class, $formHelper->getWidgetLocator()->get('hcaptcha'));
+        $this->assertInstanceOf(HCaptchaWidget::class, $formHelper->getWidgetLocator()->get('hcaptcha'));
     }
 }

@@ -61,14 +61,14 @@ class HCaptchaWidgetTest extends TestCase
     {
         $context = new ArrayContext([]);
 
-        $this->form->expects(self::exactly(2))
+        $this->form->expects($this->exactly(2))
             ->method('unlockField')
             ->withConsecutive(['field'], ['g-recaptcha-response']);
 
-        $this->html->expects(self::never())->method('script');
+        $this->html->expects($this->never())->method('script');
 
         $result = $this->widget->render(['fieldName' => 'field', 'withoutJs' => true], $context);
-        self::assertSame('<div class="h-captcha" data-sitekey=""></div>', $result);
+        $this->assertSame('<div class="h-captcha" data-sitekey=""></div>', $result);
     }
 
     /**
@@ -82,7 +82,7 @@ class HCaptchaWidgetTest extends TestCase
         Log::setConfig('error', $log);
 
         $this->widget->render(['fieldName' => 'field'], $context);
-        self::assertSame(['error Configure HCaptcha.key in your app_local.php file'], $log->read());
+        $this->assertSame(['error: Configure HCaptcha.key in your app_local.php file'], $log->read());
     }
 
     /**
@@ -94,12 +94,12 @@ class HCaptchaWidgetTest extends TestCase
         Configure::write('HCaptcha.key', 'testing-site-key');
         $context = new ArrayContext([]);
 
-        $this->html->expects(self::once())
+        $this->html->expects($this->once())
             ->method('script')
             ->with('https://hcaptcha.com/1/api.js', ['block' => 'script']);
 
         $result = $this->widget->render(['fieldName' => 'field'], $context);
-        self::assertSame('<div class="h-captcha" data-sitekey="testing-site-key"></div>', $result);
+        $this->assertSame('<div class="h-captcha" data-sitekey="testing-site-key"></div>', $result);
     }
 
     /**
@@ -108,6 +108,6 @@ class HCaptchaWidgetTest extends TestCase
      */
     public function testSecureFields(): void
     {
-        self::assertSame([], $this->widget->secureFields(['name' => 'testing']));
+        $this->assertSame([], $this->widget->secureFields(['name' => 'testing']));
     }
 }

@@ -23,8 +23,8 @@ class ValidationTest extends TestCase
     public function testGetClient(): void
     {
         $client = Validation::getClient();
-        self::assertInstanceOf(Client::class, $client);
-        self::assertSame(3, $client->getConfig('timeout'));
+        $this->assertInstanceOf(Client::class, $client);
+        $this->assertSame(3, $client->getConfig('timeout'));
     }
 
     /**
@@ -38,18 +38,18 @@ class ValidationTest extends TestCase
 
         $response = $this->createPartialMock(Client\Response::class, ['isSuccess']);
 
-        $client->expects(self::once())
+        $client->expects($this->once())
             ->method('post')
             ->with('https://hcaptcha.com/siteverify', [
                 'secret' => 'hcaptcha-secret',
                 'response' => 'testing-post-fail',
             ])
             ->willReturn($response);
-        $response->expects(self::once())->method('isSuccess')->willReturn(false);
+        $response->expects($this->once())->method('isSuccess')->willReturn(false);
 
         Validation::setClient($client);
         $result = Validation::hcaptcha('testing-post-fail');
-        self::assertFalse($result);
+        $this->assertFalse($result);
     }
 
     /**
@@ -62,25 +62,25 @@ class ValidationTest extends TestCase
         $client = $this->createPartialMock(Client::class, ['post']);
         $response = $this->createPartialMock(Client\Response::class, ['isSuccess', 'getJson']);
 
-        $client->expects(self::exactly(2))
+        $client->expects($this->exactly(2))
             ->method('post')
             ->willReturn($response);
 
-        $response->expects(self::exactly(2))
+        $response->expects($this->exactly(2))
             ->method('isSuccess')
             ->willReturn(true);
 
-        $response->expects(self::exactly(2))
+        $response->expects($this->exactly(2))
             ->method('getJson')
             ->willReturnOnConsecutiveCalls(false, ['response']);
 
         Validation::setClient($client);
 
         $result = Validation::hcaptcha('testing-success');
-        self::assertFalse($result);
+        $this->assertFalse($result);
 
         $result = Validation::hcaptcha('testing-success');
-        self::assertFalse($result);
+        $this->assertFalse($result);
     }
 
     /**
@@ -93,21 +93,21 @@ class ValidationTest extends TestCase
         $client = $this->createPartialMock(Client::class, ['post']);
         $response = $this->createPartialMock(Client\Response::class, ['isSuccess', 'getJson']);
 
-        $client->expects(self::once())
+        $client->expects($this->once())
             ->method('post')
             ->willReturn($response);
 
-        $response->expects(self::once())
+        $response->expects($this->once())
             ->method('isSuccess')
             ->willReturn(true);
 
-        $response->expects(self::once())
+        $response->expects($this->once())
             ->method('getJson')
             ->willReturn(['success' => true]);
 
         Validation::setClient($client);
 
         $result = Validation::hcaptcha('testing-success');
-        self::assertTrue($result);
+        $this->assertTrue($result);
     }
 }
