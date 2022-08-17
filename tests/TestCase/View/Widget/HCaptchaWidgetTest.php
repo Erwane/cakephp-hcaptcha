@@ -89,16 +89,42 @@ class HCaptchaWidgetTest extends TestCase
      * @test
      * @covers ::render
      */
-    public function testRender(): void
+    public function testRenderSimple(): void
     {
         Configure::write('HCaptcha.key', 'testing-site-key');
         $context = new ArrayContext([]);
 
         $this->html->expects($this->once())
             ->method('script')
-            ->with('https://hcaptcha.com/1/api.js', ['block' => 'script']);
+            ->with('https://hcaptcha.com/1/api.js', ['block' => 'script', 'async', 'defer']);
 
         $result = $this->widget->render(['fieldName' => 'field'], $context);
+        $this->assertSame('<div class="h-captcha" data-sitekey="testing-site-key"></div>', $result);
+    }
+
+    /**
+     * @test
+     * @covers ::render
+     */
+    public function testRenderWithOptions(): void
+    {
+        Configure::write('HCaptcha.key', 'testing-site-key');
+        $context = new ArrayContext([]);
+
+        $this->html->expects($this->once())
+            ->method('script')
+            ->with(
+                'https://hcaptcha.com/1/api.js?onload=myFunction&render=explicit&hl=fr&recaptchacompat=off',
+                ['block' => 'script', 'async', 'defer']
+            );
+
+        $result = $this->widget->render([
+            'fieldName' => 'field',
+            'lang' => 'fr_FR',
+            'onload' => 'myFunction',
+            'render' => 'explicit',
+            'recaptchacompat' => false,
+        ], $context);
         $this->assertSame('<div class="h-captcha" data-sitekey="testing-site-key"></div>', $result);
     }
 
