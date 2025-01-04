@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![codecov](https://codecov.io/gh/Erwane/cakephp-hcaptcha/branch/2.x/graph/badge.svg?token=NNY4FBXCEE)](https://codecov.io/gh/Erwane/cakephp-hcaptcha)
-![Build Status](https://github.com/Erwane/cakephp-hcaptcha/actions/workflows/ci.yml/badge.svg?branch=2.x)
+[![Build Status](https://github.com/Erwane/cakephp-hcaptcha/actions/workflows/ci.yml/badge.svg?branch=2.x)](https://github.com/Erwane/cakephp-contact/actions)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/Erwane/cakephp-hcaptcha)](https://packagist.org/packages/Erwane/cakephp-hcaptcha)
 [![Packagist Version](https://img.shields.io/packagist/v/Erwane/cakephp-hcaptcha)](https://packagist.org/packages/Erwane/cakephp-hcaptcha)
 
