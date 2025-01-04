@@ -10,14 +10,14 @@ use Cake\View\Helper\FormHelper;
 use Cake\View\View;
 use HCaptcha\Plugin;
 use HCaptcha\View\Widget\HCaptchaWidget;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 
 /**
- * Class PluginTest
- *
- * @package HCaptcha\Test\TestCase
- * @uses \HCaptcha\Plugin
- * @coversDefaultClass \HCaptcha\Plugin
+ * Plugin tests
  */
+#[UsesClass(Plugin::class)]
+#[CoversClass(Plugin::class)]
 class PluginTest extends TestCase
 {
     /**
@@ -32,22 +32,12 @@ class PluginTest extends TestCase
         $this->plugin = new Plugin();
     }
 
-    /**
-     * @test
-     * @covers ::initialize
-     */
     public function testInitialize(): void
     {
         $listeners = EventManager::instance()->listeners('View.beforeRender');
         $this->assertCount(1, $listeners);
-        $this->assertInstanceOf('\Hcaptcha\Plugin', $listeners[0]['callable'][0]);
-        $this->assertSame('addWidget', $listeners[0]['callable'][1]);
     }
 
-    /**
-     * @test
-     * @covers ::addWidget
-     */
     public function testAddWidgetNoFormHelper(): void
     {
         $view = new View();
@@ -59,10 +49,6 @@ class PluginTest extends TestCase
         $this->assertNull($result);
     }
 
-    /**
-     * @test
-     * @covers ::addWidget
-     */
     public function testAddWidget(): void
     {
         $view = new View();

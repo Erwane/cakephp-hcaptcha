@@ -30,7 +30,7 @@ class Plugin extends BasePlugin
     /**
      * Add HCaptcha widget to FormHelper, if exists.
      *
-     * @param  \Cake\Event\EventInterface $event Dispatched event
+     * @param \Cake\Event\EventInterface $event Dispatched event
      * @return void
      */
     public function addWidget(EventInterface $event): void
