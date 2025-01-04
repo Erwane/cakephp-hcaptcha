@@ -22,22 +22,22 @@ class HCaptchaWidget implements WidgetInterface
     /**
      * @var \Cake\View\StringTemplate
      */
-    protected $_templates;
+    protected StringTemplate $_templates;
 
     /**
      * @var \Cake\View\View
      */
-    private $_view;
+    private View $_view;
 
     /**
      * @var string
      */
-    protected $_apiUrl = 'https://hcaptcha.com/1/api.js';
+    protected string $_apiUrl = 'https://hcaptcha.com/1/api.js';
 
     /**
-     * @var string[]
+     * @var array<string>
      */
-    protected $_renderAllowedValues = ['explicit', 'onload'];
+    protected array $_renderAllowedValues = ['explicit', 'onload'];
 
     /**
      * HCaptchaWidget constructor.
@@ -117,7 +117,7 @@ class HCaptchaWidget implements WidgetInterface
      * No field should be secured
      *
      * @param array $data The data to render.
-     * @return string[] Array of fields to secure.
+     * @return array<string> Array of fields to secure.
      */
     public function secureFields(array $data): array
     {

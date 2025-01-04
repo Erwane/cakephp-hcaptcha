@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         backupGlobals="true"
+         cacheDirectory=".phpunit.cache"
+         stopOnFailure="false">
+
+    <php>
+        <ini name="memory_limit" value="-1"/>
+        <ini name="error_reporting" value="32767"/>
+        <const name="PHPUNIT_TESTSUITE" value="true"/>
+    </php>
+
+    <extensions>
+        <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
+    </extensions>
+
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests/TestCase</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">src/</directory>
+        </include>
+    </source>
+</phpunit>

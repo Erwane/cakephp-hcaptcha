@@ -1,15 +1,21 @@
 # HCaptcha plugin for CakePHP 4.x
 
-![Build Status](https://github.com/Erwane/cakephp-hcaptcha/actions/workflows/ci.yml/badge.svg?branch=1.x)
-[![codecov](https://codecov.io/gh/Erwane/cakephp-hcaptcha/branch/1.x/graph/badge.svg?token=NNY4FBXCEE)](https://codecov.io/gh/Erwane/cakephp-hcaptcha)
-[![Total Downloads](https://img.shields.io/packagist/dt/Erwane/cakephp-hcaptcha?style=flat-square)](https://packagist.org/packages/Erwane/cakephp-hcaptcha/stats)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
+[![codecov](https://codecov.io/gh/Erwane/cakephp-hcaptcha/branch/2.x/graph/badge.svg?token=NNY4FBXCEE)](https://codecov.io/gh/Erwane/cakephp-hcaptcha)
+![Build Status](https://github.com/Erwane/cakephp-hcaptcha/actions/workflows/ci.yml/badge.svg?branch=2.x)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/Erwane/cakephp-hcaptcha)](https://packagist.org/packages/Erwane/cakephp-hcaptcha)
+[![Packagist Version](https://img.shields.io/packagist/v/Erwane/cakephp-hcaptcha)](https://packagist.org/packages/Erwane/cakephp-hcaptcha)
+
+## Version map
+
+| branch | CakePHP core | PHP min |
+|--------|--------------|---------|
+| 1.x    | ^4.0         | PHP 7.2 |
+| 2.x    | ^5.0         | PHP 8.1 |
 
 ## Installation
 
-With composer
-
-```
+```sh
 composer require erwane/cakephp-hcaptcha
 ```
 

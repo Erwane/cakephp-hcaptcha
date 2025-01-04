@@ -3,78 +3,43 @@ declare(strict_types=1);
 
 namespace HCaptcha\Test\TestCase;
 
-use Cake\Http\Client;
+use Cake\Event\EventManager;
+use Cake\Http\Client\Request;
+use Cake\Http\TestSuite\HttpClientTrait;
 use Cake\TestSuite\TestCase;
 use HCaptcha\Validation;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 
 /**
- * Class ValidationTest
- *
- * @package HCaptcha\Test\TestCase
- * @uses \HCaptcha\Validation
- * @coversDefaultClass \HCaptcha\Validation
+ * Validation tests
  */
+#[UsesClass(Validation::class)]
+#[CoversClass(Validation::class)]
 class ValidationTest extends TestCase
 {
-    /**
-     * @test
-     * @covers ::getClient
-     */
-    public function testGetClient(): void
-    {
-        $client = Validation::getClient();
-        $this->assertInstanceOf(Client::class, $client);
-        $this->assertSame(3, $client->getConfig('timeout'));
-    }
+    use HttpClientTrait;
 
-    /**
-     * @test
-     * @covers ::setClient
-     * @covers ::hcaptcha
-     */
     public function testHcaptchaResponseFail(): void
     {
-        $client = $this->createPartialMock(Client::class, ['post']);
+        $this->mockClientPost('https://hcaptcha.com/siteverify', $this->newClientResponse(403));
 
-        $response = $this->createPartialMock(Client\Response::class, ['isSuccess']);
-
-        $client->expects($this->once())
-            ->method('post')
-            ->with('https://hcaptcha.com/siteverify', [
+        EventManager::instance()->on('HttpClient.beforeSend', function ($event, Request $request) {
+            parse_str((string)$request->getBody(), $data);
+            $this->assertEquals([
                 'secret' => 'hcaptcha-secret',
                 'response' => 'testing-post-fail',
-            ])
-            ->willReturn($response);
-        $response->expects($this->once())->method('isSuccess')->willReturn(false);
+            ], $data);
+        });
 
-        Validation::setClient($client);
         $result = Validation::hcaptcha('testing-post-fail');
         $this->assertFalse($result);
     }
 
-    /**
-     * @test
-     * @covers ::setClient
-     * @covers ::hcaptcha
-     */
     public function testHcaptchaSuccessNotSet(): void
     {
-        $client = $this->createPartialMock(Client::class, ['post']);
-        $response = $this->createPartialMock(Client\Response::class, ['isSuccess', 'getJson']);
-
-        $client->expects($this->exactly(2))
-            ->method('post')
-            ->willReturn($response);
-
-        $response->expects($this->exactly(2))
-            ->method('isSuccess')
-            ->willReturn(true);
-
-        $response->expects($this->exactly(2))
-            ->method('getJson')
-            ->willReturnOnConsecutiveCalls(false, ['response']);
-
-        Validation::setClient($client);
+        $this->mockClientPost('https://hcaptcha.com/siteverify', $this->newClientResponse(200, [], 'false'));
+        $this->mockClientPost('https://hcaptcha.com/siteverify', $this->newClientResponse(200, [], '"response"'));
 
         $result = Validation::hcaptcha('testing-success');
         $this->assertFalse($result);
@@ -83,29 +48,9 @@ class ValidationTest extends TestCase
         $this->assertFalse($result);
     }
 
-    /**
-     * @test
-     * @covers ::setClient
-     * @covers ::hcaptcha
-     */
     public function testHcaptchaSuccess(): void
     {
-        $client = $this->createPartialMock(Client::class, ['post']);
-        $response = $this->createPartialMock(Client\Response::class, ['isSuccess', 'getJson']);
-
-        $client->expects($this->once())
-            ->method('post')
-            ->willReturn($response);
-
-        $response->expects($this->once())
-            ->method('isSuccess')
-            ->willReturn(true);
-
-        $response->expects($this->once())
-            ->method('getJson')
-            ->willReturn(['success' => true]);
-
-        Validation::setClient($client);
+        $this->mockClientPost('https://hcaptcha.com/siteverify', $this->newClientResponse(200, [], json_encode(['success' => true])));
 
         $result = Validation::hcaptcha('testing-success');
         $this->assertTrue($result);

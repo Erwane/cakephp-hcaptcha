@@ -6,5 +6,5 @@ grumphp:
     phplint: ~
     phpcs:
       whitelist_patterns:
-        - /^config\/(.*)/
-        - /^src\/(.*)/
+        - /^src\/(.*\.php)/
+        - /^tests\/(.*\.php)/
