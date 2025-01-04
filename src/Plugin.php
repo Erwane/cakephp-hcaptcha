@@ -44,7 +44,7 @@ class Plugin extends BasePlugin
         }
 
         /** @var \Cake\View\Helper\FormHelper $formHelper */
-        $view->helpers()->get('Form')
-            ->addWidget('hcaptcha', ['HCaptcha.HCaptcha', '_view']);
+        $formHelper = $view->helpers()->get('Form');
+        $formHelper->addWidget('hcaptcha', ['HCaptcha.HCaptcha', '_view']);
     }
 }
