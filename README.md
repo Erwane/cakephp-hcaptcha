@@ -6,6 +6,13 @@
 [![Packagist Downloads](https://img.shields.io/packagist/dt/Erwane/cakephp-hcaptcha)](https://packagist.org/packages/Erwane/cakephp-hcaptcha)
 [![Packagist Version](https://img.shields.io/packagist/v/Erwane/cakephp-hcaptcha)](https://packagist.org/packages/Erwane/cakephp-hcaptcha)
 
+## Version map
+
+| branch | CakePHP core | PHP min |
+|--------|--------------|---------|
+| 1.x    | ^4.0         | PHP 7.2 |
+| 2.x    | ^5.0         | PHP 8.1 |
+
 ## Installation
 
 ```sh
