@@ -44,13 +44,13 @@ class HCaptchaWidgetTest extends TestCase
         parent::setUp();
 
         $templates = new StringTemplate();
-        $view = $this->createMock(View::class);
+        $view = new View();
 
         $this->form = $this->createPartialMock('Cake\View\Helper\FormHelper', ['unlockField']);
         $this->html = $this->createPartialMock('Cake\View\Helper\HtmlHelper', ['script']);
 
-        $view->Form = $this->form;
-        $view->Html = $this->html;
+        $view->loadHelper('Form', ['className' => $this->form]);
+        $view->loadHelper('Html', ['className' => $this->html]);
 
         $this->widget = new HCaptchaWidget($templates, $view);
     }
