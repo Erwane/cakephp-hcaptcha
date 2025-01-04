@@ -1,4 +1,4 @@
-# HCaptcha plugin for CakePHP 4.x
+# HCaptcha plugin for CakePHP
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![codecov](https://codecov.io/gh/Erwane/cakephp-hcaptcha/branch/2.x/graph/badge.svg?token=NNY4FBXCEE)](https://codecov.io/gh/Erwane/cakephp-hcaptcha)
