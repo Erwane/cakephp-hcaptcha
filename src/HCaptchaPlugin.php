@@ -8,11 +8,11 @@ use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 
 /**
- * Class Plugin
+ * Class HCaptchaPlugin
  *
  * @package HCaptcha
  */
-class Plugin extends BasePlugin
+class HCaptchaPlugin extends BasePlugin
 {
     /**
      * Initialize plugin.
