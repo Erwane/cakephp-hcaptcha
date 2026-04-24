@@ -95,7 +95,7 @@ class HCaptchaWidget implements WidgetInterface
             if ($data['recaptchacompat'] !== null) {
                 $queryArgs['recaptchacompat'] = in_array(
                     $data['recaptchacompat'],
-                    [1, '1', 'y', 'Y', 'yes', 'on']
+                    [1, '1', 'y', 'Y', 'yes', 'on'],
                 ) ? 'on' : 'off';
             }
 

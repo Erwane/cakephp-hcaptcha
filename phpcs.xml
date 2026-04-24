@@ -7,8 +7,6 @@
     <arg name="severity=1"/>
     <arg name="extensions=php"/>
 
-    <config name="installed_paths" value="../../cakephp/cakephp-codesniffer"/>
-
     <file>src/</file>
     <file>tests/</file>
 
