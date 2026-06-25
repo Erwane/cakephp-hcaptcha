@@ -8,7 +8,7 @@ use Cake\Event\EventManager;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\FormHelper;
 use Cake\View\View;
-use HCaptcha\Plugin;
+use HCaptcha\HCaptchaPlugin;
 use HCaptcha\View\Widget\HCaptchaWidget;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -16,12 +16,12 @@ use PHPUnit\Framework\Attributes\UsesClass;
 /**
  * Plugin tests
  */
-#[UsesClass(Plugin::class)]
-#[CoversClass(Plugin::class)]
-class PluginTest extends TestCase
+#[UsesClass(HCaptchaPlugin::class)]
+#[CoversClass(HCaptchaPlugin::class)]
+class HCaptchaPluginTest extends TestCase
 {
     /**
-     * @var \HCaptcha\Plugin
+     * @var \HCaptcha\HCaptchaPlugin
      */
     private $plugin;
 
@@ -29,7 +29,7 @@ class PluginTest extends TestCase
     {
         parent::setUp();
 
-        $this->plugin = new Plugin();
+        $this->plugin = new HCaptchaPlugin();
     }
 
     public function testInitialize(): void
