@@ -62,7 +62,7 @@ class HCaptchaWidgetTest extends TestCase
         $this->form->expects($this->exactly(2))
             ->method('unlockField')
             ->with(
-                ...self::withConsecutive(['field'], ['g-recaptcha-response'])
+                ...self::withConsecutive(['field'], ['g-recaptcha-response']),
             );
 
         $this->html->expects($this->never())->method('script');
@@ -103,7 +103,7 @@ class HCaptchaWidgetTest extends TestCase
             ->method('script')
             ->with(
                 'https://hcaptcha.com/1/api.js?onload=myFunction&render=explicit&hl=fr&recaptchacompat=off',
-                ['block' => 'script', 'async', 'defer']
+                ['block' => 'script', 'async', 'defer'],
             );
 
         $result = $this->widget->render([
